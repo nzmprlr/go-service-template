@@ -37,14 +37,14 @@ func (io *IO) ErrorResponse(w http.ResponseWriter, err interface{}) {
 	restserver.RespondErrorJSON(io.toll, w, err)
 }
 
-func (io *IO) TodoRequest(r *http.Request) (*FooRequest, error) {
+func (io *IO) FooRequest(r *http.Request) (*FooRequest, error) {
 	defer io.toll.Metric(io.toll.Metrics.IO())
 
 	request := newFooRequest()
 	return request, io.parseRequest(r, request)
 }
 
-func (io *IO) TodoResponse(w http.ResponseWriter, m *model.Foo) error {
+func (io *IO) FooResponse(w http.ResponseWriter, m *model.Foo) error {
 	defer io.toll.Metric(io.toll.Metrics.IO(m))
 
 	response := newFooResponse(m)
