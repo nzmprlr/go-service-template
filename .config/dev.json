@@ -1,0 +1,31 @@
+{
+    "maxLenFoo": 10,
+    "highway": {
+        "rest": [
+            {
+                "addr": ":8080",
+                "health": true,
+                "maxRequestBodyByte": 1048576,
+                "readHeaderTimeoutSecond": 20,
+                "readTimeoutSecond": 60,
+                "writeTimeoutSecond": 120,
+                "idleTimeoutSecond": 20,
+                "corsDomains": [
+                    "*"
+                ],
+                "corsHeaders": [
+                    "content-type",
+                    "header"
+                ]
+            },
+            {
+                "addr": ":8081",
+                "pprof": "/pprof",
+                "readHeaderTimeoutSecond": 20,
+                "readTimeoutSecond": 60,
+                "writeTimeoutSecond": 120,
+                "idleTimeoutSecond": 20
+            }
+        ]
+    }
+}
