@@ -1,7 +1,6 @@
 MODULE := $(shell awk 'NR==1 {print $$2}' go.mod)
 
 .PHONY: build
-.PHONE: foo
 
 all: build run
 
