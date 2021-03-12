@@ -3,12 +3,12 @@ package doc
 import "{MODULE}/server/io"
 
 // swagger:parameters postFooRequest
-type getFooRequest struct {
+type postFooRequest struct {
 	*io.FooRequest
 }
 
 // Documentation about response.
 // swagger:response postFooResponse
-type getFooResponse struct {
+type postFooResponse struct {
 	*io.FooResponse
 }

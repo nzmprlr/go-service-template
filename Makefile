@@ -14,9 +14,6 @@ build:
 run:
 	./$(MODULE)
 
-clean:
-	find . -name "$(MODULE)*" -maxdepth 1 -type f -print -delete
-
 test: --mockgen
 	go test -cover ./...
 
@@ -24,6 +21,9 @@ test-cover: --mockgen
 	go test -coverprofile=$(MODULE)-cover.txt ./...
 	go tool cover -html=$(MODULE)-cover.txt -o $(MODULE)-cover.html
 	open $(MODULE)-cover.html
+
+clean:
+	find . -name "$(MODULE)*" -maxdepth 1 -type f -print -delete
 
 docker: docker-build docker-run
 
