@@ -1,6 +1,7 @@
 MODULE := $(shell awk 'NR==1 {print $$2}' go.mod)
 
 .PHONY: build
+.PHONE: foo
 
 all: build run
 
@@ -98,4 +99,6 @@ endif
 	@$(SED) "s/{MODULE}/$(INIT)/g" go.mod
 	@rm -rf .git
 	git init
+	@if [ "`git config --global user.name`" == "" ]; then git config --global user.name "`whoami`"; fi;
+	@if [ "`git config --global user.email`" == "" ]; then git config --global user.email "`whoami`"; fi;
 	git commit --allow-empty -m 'initial commit'
