@@ -98,6 +98,6 @@ endif
 	@$(SED) "s/{MODULE}/$(INIT)/g" go.mod
 	@rm -rf .git
 	git init
-	@if [ "`git config --global user.name`" == "" ]; then git config --global user.name "`whoami`"; fi;
-	@if [ "`git config --global user.email`" == "" ]; then git config --global user.email "`whoami`"; fi;
+	@if [ "`git config --global user.name`" = "" ]; then git config --global user.name "`whoami`"; fi;
+	@if [ "`git config --global user.email`" = "" ]; then git config --global user.email "`whoami`"; fi;
 	git commit --allow-empty -m 'initial commit'
