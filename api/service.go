@@ -1,6 +1,6 @@
 package api
 
-import "template/model"
+import "{MODULE}/model"
 
 type FooService interface {
 	Foo(string, string, string, string) (*model.Foo, error)

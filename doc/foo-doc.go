@@ -1,6 +1,6 @@
 package doc
 
-import "template/server/io"
+import "{MODULE}/server/io"
 
 // swagger:parameters postFooRequest
 type getFooRequest struct {

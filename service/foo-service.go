@@ -4,11 +4,11 @@ import (
 	"github.com/nzmprlr/highway"
 	"github.com/nzmprlr/highway/toll"
 
-	"template/api"
-	"template/call"
-	"template/data"
-	"template/event"
-	"template/model"
+	"{MODULE}/api"
+	"{MODULE}/call"
+	"{MODULE}/data"
+	"{MODULE}/event"
+	"{MODULE}/model"
 )
 
 type Foo struct {

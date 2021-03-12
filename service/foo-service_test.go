@@ -8,7 +8,7 @@ import (
 	"github.com/nzmprlr/highway/toll"
 	"github.com/stretchr/testify/assert"
 
-	mock_api "template/mock"
+	mock_api "{MODULE}/mock"
 )
 
 func TestFoo(t *testing.T) {

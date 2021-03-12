@@ -15,7 +15,7 @@ run:
 	./$(MODULE)
 
 clean:
-	find . -name "$(MODULE)*" ! -name "*.go" ! -name "go.*" ! -name "Makefile" -maxdepth 1 -type f -print -delete
+	find . -name "$(MODULE)*" -maxdepth 1 -type f -print -delete
 
 test: --mockgen
 	go test -cover ./...
@@ -24,6 +24,18 @@ test-cover: --mockgen
 	go test -coverprofile=$(MODULE)-cover.txt ./...
 	go tool cover -html=$(MODULE)-cover.txt -o $(MODULE)-cover.html
 	open $(MODULE)-cover.html
+
+docker: docker-build docker-run
+
+docker-build: TAG ?= $(shell git rev-parse --short HEAD)
+docker-build:
+	docker build -t $(MODULE):$(TAG) .
+
+docker-run: APP_ENV ?= local
+docker-run: PORT ?= 8080
+docker-run: TAG ?= $(shell git rev-parse --short HEAD)
+docker-run:
+	docker run -it --rm -p $(PORT):8080 -e APP_ENV=$(APP_ENV) $(MODULE):$(TAG)
 
 --mockgen: MOCKGEN_VER = 1.5.0
 --mockgen:
@@ -59,7 +71,6 @@ generate-swagger: --check-swagger
 	$(eval SED=$(if $(filter Darwin, $(shell uname -s)), sed -i '', sed -i))
 	$(eval TEMP=$(shell mktemp -d))
 	@cp doc/swagger.go $(TEMP)/swagger.go
-	@$(SED) "s/{MODULE}/$(MODULE)/g" doc/swagger.go
 	@$(SED) "s/{REVISION}/$(shell git rev-parse --short HEAD)/g" doc/swagger.go
 	@$(SED) "s/{SWAGGER_HOST}/$(SWAGGER_HOST)/g" doc/swagger.go
 	swagger generate spec -o $(MODULE)-swagger.yaml --scan-models
@@ -70,4 +81,21 @@ generate-swagger: --check-swagger
 ifndef SWAGGER_HOST
 	$(error SWAGGER_HOST variable is required to make.)
 endif
-	@if ! hash swagger &> /dev/null; then echo "swagger(go-swagger) is required to make: https://goswagger.io/install.html"; exit 1; fi
+	@if ! hash swagger &> /dev/null; then echo "swagger(go-swagger) is required to make: https://goswagger.io/install.html > Docker image installation not working!"; exit 1; fi
+
+init-template: 
+ifneq '$(MODULE)' '{MODULE}'
+	$(error template already initialized, module: $(MODULE))
+endif
+ifndef INIT
+	$(error INIT variable is required to make.)
+endif
+	$(eval SED=$(if $(filter Darwin, $(shell uname -s)), sed -i '', sed -i))
+	@find . -name "*.go" -maxdepth 3 -type f -print -exec $(SED) "s/{MODULE}/$(INIT)/g" {} +
+	@$(SED) "s/{MODULE}/$(INIT)/g" .gitignore
+	@$(SED) "s/{MODULE}/$(INIT)/g" .dockerignore
+	@$(SED) "s/{MODULE}/$(INIT)/g" Dockerfile
+	@$(SED) "s/{MODULE}/$(INIT)/g" go.mod
+	@rm -rf .git
+	git init
+	git commit --allow-empty -m 'initial commit'

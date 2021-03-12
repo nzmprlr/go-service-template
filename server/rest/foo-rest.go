@@ -5,9 +5,9 @@ import (
 
 	"github.com/nzmprlr/highway/lane/restserver"
 
-	"template/api"
-	"template/server/io"
-	"template/service"
+	"{MODULE}/api"
+	"{MODULE}/server/io"
+	"{MODULE}/service"
 )
 
 func handleFoo() http.HandlerFunc {

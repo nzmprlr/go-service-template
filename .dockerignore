@@ -1,0 +1,33 @@
+# Docker
+Dockerfile
+.dockerignore
+
+# macOS
+.DS_Store
+
+# JetBrains
+.idea/
+
+# VSCode
+.vscode/
+
+# Github
+.github/
+
+# Coverage
+coverage/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Markdowns
+*.md
+
+# Application
+/{MODULE}*
+mock
+LICENSE

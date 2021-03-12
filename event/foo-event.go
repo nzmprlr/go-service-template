@@ -4,8 +4,8 @@ import (
 	"github.com/nzmprlr/highway"
 	"github.com/nzmprlr/highway/toll"
 
-	"template/api"
-	"template/data"
+	"{MODULE}/api"
+	"{MODULE}/data"
 )
 
 type Foo struct {

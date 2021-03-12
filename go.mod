@@ -1,4 +1,4 @@
-module template
+module {MODULE}
 
 go 1.16
 

@@ -7,7 +7,7 @@ import (
 
 	"github.com/nzmprlr/highway/lane/restserver"
 
-	"template/server/rest"
+	"{MODULE}/server/rest"
 )
 
 func main() {

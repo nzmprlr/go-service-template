@@ -8,8 +8,8 @@ import (
 	"github.com/nzmprlr/highway/asphalt/errs"
 	"github.com/nzmprlr/highway/lane/restserver"
 
-	"template/config"
-	"template/model"
+	"{MODULE}/config"
+	"{MODULE}/model"
 )
 
 type fooRequestBody struct {

@@ -6,7 +6,7 @@ import (
 	"github.com/nzmprlr/highway/lane/restserver"
 	"github.com/nzmprlr/highway/toll"
 
-	"template/model"
+	"{MODULE}/model"
 )
 
 type IO struct {
