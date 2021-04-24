@@ -7,8 +7,13 @@ import (
 
 	"github.com/nzmprlr/highway/lane/restserver"
 
+	"{MODULE}/config"
 	"{MODULE}/server/rest"
 )
+
+func init() {
+	config.Init()
+}
 
 func main() {
 	exit := make(chan os.Signal, 1)

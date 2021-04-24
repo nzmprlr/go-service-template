@@ -21,7 +21,7 @@ type Config struct {
 	Highway *highway.Config `json:"highway"`
 }
 
-func init() {
+func Init() {
 	file, err := os.Open(fmt.Sprintf(".config/%s.json", highway.Env()))
 	if err != nil {
 		panic(err)
