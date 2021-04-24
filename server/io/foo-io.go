@@ -64,7 +64,12 @@ func (foo *FooRequest) Validate() error {
 	return errs.Reduce()
 }
 
-func newFooRequest() *FooRequest { return &FooRequest{Body: &fooRequestBody{}} }
+func (io *IO) FooRequest(r *http.Request) (*FooRequest, error) {
+	defer io.toll.Metric(io.toll.Metrics.IO())
+
+	request := &FooRequest{Body: &fooRequestBody{}}
+	return request, io.parseRequest(r, request)
+}
 
 type FooResponse struct {
 	*model.Foo
@@ -77,4 +82,8 @@ func (foo *FooResponse) Format() error {
 	return nil
 }
 
-func newFooResponse(m *model.Foo) *FooResponse { return &FooResponse{m} }
+func (io *IO) FooResponse(w http.ResponseWriter, m *model.Foo) error {
+	defer io.toll.Metric(io.toll.Metrics.IO(m))
+
+	return io.respondJSON(w, &FooResponse{m})
+}

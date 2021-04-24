@@ -5,8 +5,6 @@ import (
 
 	"github.com/nzmprlr/highway/lane/restserver"
 	"github.com/nzmprlr/highway/toll"
-
-	"{MODULE}/model"
 )
 
 type IO struct {
@@ -35,20 +33,6 @@ func (io *IO) respondJSON(w http.ResponseWriter, response restserver.Response) e
 
 func (io *IO) ErrorResponse(w http.ResponseWriter, err interface{}) {
 	restserver.RespondErrorJSON(io.toll, w, err)
-}
-
-func (io *IO) FooRequest(r *http.Request) (*FooRequest, error) {
-	defer io.toll.Metric(io.toll.Metrics.IO())
-
-	request := newFooRequest()
-	return request, io.parseRequest(r, request)
-}
-
-func (io *IO) FooResponse(w http.ResponseWriter, m *model.Foo) error {
-	defer io.toll.Metric(io.toll.Metrics.IO(m))
-
-	response := newFooResponse(m)
-	return io.respondJSON(w, response)
 }
 
 func New(t *toll.Toll) *IO {
